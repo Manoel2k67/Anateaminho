@@ -26,19 +26,20 @@ body {
 
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Alinha o conteúdo no topo */
     position: relative;
     height: 100vh;
     gap: 20px;
+    padding-top: 20px; /* Espaço no topo para o envelope */
 }
 
 .envelope-wrapper {
     background: var(--bg-envelope-color);
     box-shadow: 0 0 40px var(--shadow-color);
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -47,8 +48,8 @@ body {
 
 .envelope {
     position: relative;
-    width: 320px;
-    height: 240px;
+    width: 240px; /* Tamanho menor para celular */
+    height: 160px; /* Tamanho menor para celular */
     overflow: hidden;
 }
 
@@ -57,9 +58,9 @@ body {
     position: absolute;
     top: 0;
     z-index: 2;
-    border-top: 140px solid var(--envelope-tab);
-    border-right: 160px solid transparent;
-    border-left: 160px solid transparent;
+    border-top: 80px solid var(--envelope-tab); /* Ajustado para tamanho menor */
+    border-right: 120px solid transparent;
+    border-left: 120px solid transparent;
     transform-origin: top;
     transition: all 0.4s ease-in-out 0.5s;
 }
@@ -70,18 +71,18 @@ body {
     z-index: 2;
     width: 0px;
     height: 0px;
-    border-top: 140px solid transparent;
-    border-right: 160px solid var(--envelope-cover);
-    border-bottom: 100px solid var(--envelope-cover);
-    border-left: 160px solid var(--envelope-cover);
+    border-top: 80px solid transparent; /* Ajustado para tamanho menor */
+    border-right: 120px solid var(--envelope-cover);
+    border-bottom: 60px solid var(--envelope-cover); /* Ajustado para tamanho menor */
+    border-left: 120px solid var(--envelope-cover);
 }
 
 .heart {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 30px;
-    height: 30px;
+    width: 20px; /* Tamanho menor para celular */
+    height: 20px; /* Tamanho menor para celular */
     background: var(--heart-color);
     z-index: 4;
     transform: translate(-50%, -50%) rotate(45deg);
@@ -97,18 +98,18 @@ body {
 .heart::after {
     content: "";
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 20px; /* Tamanho menor para celular */
+    height: 20px; /* Tamanho menor para celular */
     background-color: var(--heart-color);
     border-radius: 50%;
 }
 
 .heart::before {
-    top: -15px;
+    top: -10px; /* Ajustado para tamanho menor */
 }
 
 .heart::after {
-    right: 15px;
+    right: 10px; /* Ajustado para tamanho menor */
 }
 
 /* Animação do envelope */
@@ -118,7 +119,7 @@ body {
 }
 
 .flap .envelope-wrapper {
-    transform: translateY(-170px);
+    transform: translateY(-100px); /* Ajustado para telas menores */
 }
 
 .flap .heart {
@@ -130,76 +131,55 @@ body {
 .message {
     position: absolute;
     top: 50%;
-    left: 20%; /* Começa fora da carta */
-    transform: translateY(-50%) translateX(-100%); /* Começa fora da tela à esquerda */
-    width: 100%;
-    max-width: 550px; /* Ajuste o tamanho da folha */
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9); /* Centraliza e reduz um pouco o tamanho */
+    width: 90%; /* Ocupa 90% da largura da tela */
+    max-width: 400px; /* Limita o tamanho máximo */
     background: var(--vintage-paper);
     color: var(--txt-color);
     font-family: var(--paper-font);
-    font-size: 24px;
-    line-height: 1.6;
-    padding: 30px;
+    font-size: 16px; /* Tamanho menor para celular */
+    line-height: 1.5; /* Espaçamento menor para melhor leitura */
+    padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     opacity: 0;
     transition: transform 1s ease-in-out, opacity 1s ease-in-out;
     z-index: 10;
-    border-radius: 10px; /* Deixa as bordas arredondadas para dar mais aparência de página */
+    border-radius: 10px;
 }
 
 /* Animação da folha deslizando */
 .show {
-    transform: translateX(0) translateY(-50%); /* Desliza para dentro */
+    transform: translate(-50%, -50%) scale(1); /* Retorna ao tamanho normal */
     opacity: 1;
 }
 
 /* Ajustes para telas menores */
-@media (max-width: 768px) {
-    .message {
-        max-width: 90%; /* Reduz a largura da mensagem */
-        font-size: 18px; /* Reduz o tamanho da fonte */
-        padding: 20px; /* Reduz o padding */
-        left: 50%; /* Centraliza a mensagem */
-        transform: translateX(-50%) translateY(-50%); /* Ajusta a posição */
-    }
-
-    .envelope-wrapper {
-        padding: 10px; /* Reduz o padding do envelope */
-    }
-
-    .envelope {
-        width: 280px; /* Reduz o tamanho do envelope */
-        height: 200px;
-    }
-
-    .heart {
-        width: 25px; /* Reduz o tamanho do coração */
-        height: 25px;
-    }
-
-    .heart::before,
-    .heart::after {
-        width: 25px;
-        height: 25px;
-    }
-
-    .flap .envelope-wrapper {
-        transform: translateY(-120px); /* Ajusta a animação para telas menores */
-    }
-}
-
 @media (max-width: 480px) {
     .message {
-        font-size: 16px; /* Reduz ainda mais o tamanho da fonte */
-        padding: 15px; /* Reduz o padding */
+        font-size: 14px; /* Tamanho ainda menor para telas muito pequenas */
+        padding: 15px;
     }
 
     .envelope {
-        width: 240px; /* Reduz ainda mais o tamanho do envelope */
-        height: 180px;
+        width: 200px; /* Tamanho menor para telas muito pequenas */
+        height: 140px;
+    }
+
+    .envelope::before {
+        border-top: 60px solid var(--envelope-tab); /* Ajustado para telas muito pequenas */
+        border-right: 100px solid transparent;
+        border-left: 100px solid transparent;
+    }
+
+    .envelope::after {
+        border-top: 60px solid transparent; /* Ajustado para telas muito pequenas */
+        border-right: 100px solid var(--envelope-cover);
+        border-bottom: 40px solid var(--envelope-cover); /* Ajustado para telas muito pequenas */
+        border-left: 100px solid var(--envelope-cover);
     }
 
     .flap .envelope-wrapper {
-        transform: translateY(-100px); /* Ajusta a animação para telas muito pequenas */
+        transform: translateY(-80px); /* Ajustado para telas muito pequenas */
     }
 }
