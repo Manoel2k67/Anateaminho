@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Romântica</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- Adicionando a fonte Dancing Script do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Fonte serifada para a carta -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <!-- Envelope com a carta dentro -->
+            </div>
+            <div class="heart"></div>
+        </div>
+        <!-- Folha com a mensagem que aparecerá após a animaçãooe -->
+        <div class="message">
+            <strong>Para minha querida Ana ❤️</strong>
+            <p>Meu amor,</p>
+            <p>Eu queria começar essa carta pedindo desculpas por todos os momentos em que fui rude ou deixei de te dar a atenção que você merece. Eu te amo muito, mais do que qualquer coisa nesse mundo.</p>
+            <p>Me lembro do nosso primeiro abraço, como se o mundo tivesse parado. Do primeiro beijo, como se fosse o começo de algo que já estava escrito.</p>
+            <p>Eu só quero que você saiba o quanto você significa pra mim e o quanto minha vida ficou mais feliz desde que você entrou nela. Quero te ouvir mais, te fazer mais feliz. Estou te esperando, sempre.</p>
+            <p>Com todo o meu amor,</p>
+            <p>Manoel M.</p>
+        </div>
+    </div>
+
+    <script>
+        const envelope = document.querySelector('.envelope-wrapper');
+        const message = document.querySelector('.message');
+
+        envelope.addEventListener('click', () => {
+            envelope.classList.toggle('flap');
+            message.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

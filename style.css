@@ -1,0 +1,205 @@
+:root {
+    --primary: #fff;
+    --bg-color: #ffe6f2;
+    --bg-envelope-color: #ffcccc;
+    --envelope-tab: #ffb3b3;
+    --envelope-cover: #ff9999;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --txt-color: #333;
+    --heart-color: #ff4d4d;
+    --vintage-paper: #f1e1c6; /* Cor da folha vintage */
+    --paper-font: 'Crimson Pro', serif; /* Fonte mais legível para a carta */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100vh;
+    gap: 20px;
+}
+
+.envelope-wrapper {
+    background: var(--bg-envelope-color);
+    box-shadow: 0 0 40px var(--shadow-color);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.8s ease-in-out;
+}
+
+.envelope {
+    position: relative;
+    width: 320px;
+    height: 240px;
+    overflow: hidden;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    border-top: 140px solid var(--envelope-tab);
+    border-right: 160px solid transparent;
+    border-left: 160px solid transparent;
+    transform-origin: top;
+    transition: all 0.4s ease-in-out 0.5s;
+}
+
+.envelope::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    width: 0px;
+    height: 0px;
+    border-top: 140px solid transparent;
+    border-right: 160px solid var(--envelope-cover);
+    border-bottom: 100px solid var(--envelope-cover);
+    border-left: 160px solid var(--envelope-cover);
+}
+
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    background: var(--heart-color);
+    z-index: 4;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: transform 0.3s ease-in-out 0.3s;
+    box-shadow: 0 1px 6px var(--shadow-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: var(--heart-color);
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -15px;
+}
+
+.heart::after {
+    right: 15px;
+}
+
+/* Animação do envelope */
+.flap .envelope::before {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.flap .envelope-wrapper {
+    transform: translateY(-170px);
+}
+
+.flap .heart {
+    transform: scale(0);
+    transition-delay: 0.2s;
+}
+
+/* Folha com a mensagem */
+.message {
+    position: absolute;
+    top: 50%;
+    left: 20%; /* Começa fora da carta */
+    transform: translateY(-50%) translateX(-100%); /* Começa fora da tela à esquerda */
+    width: 100%;
+    max-width: 550px; /* Ajuste o tamanho da folha */
+    background: var(--vintage-paper);
+    color: var(--txt-color);
+    font-family: var(--paper-font);
+    font-size: 24px;
+    line-height: 1.6;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    z-index: 10;
+    border-radius: 10px; /* Deixa as bordas arredondadas para dar mais aparência de página */
+}
+
+/* Animação da folha deslizando */
+.show {
+    transform: translateX(0) translateY(-50%); /* Desliza para dentro */
+    opacity: 1;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+    .message {
+        max-width: 90%; /* Reduz a largura da mensagem */
+        font-size: 18px; /* Reduz o tamanho da fonte */
+        padding: 20px; /* Reduz o padding */
+        left: 50%; /* Centraliza a mensagem */
+        transform: translateX(-50%) translateY(-50%); /* Ajusta a posição */
+    }
+
+    .envelope-wrapper {
+        padding: 10px; /* Reduz o padding do envelope */
+    }
+
+    .envelope {
+        width: 280px; /* Reduz o tamanho do envelope */
+        height: 200px;
+    }
+
+    .heart {
+        width: 25px; /* Reduz o tamanho do coração */
+        height: 25px;
+    }
+
+    .heart::before,
+    .heart::after {
+        width: 25px;
+        height: 25px;
+    }
+
+    .flap .envelope-wrapper {
+        transform: translateY(-120px); /* Ajusta a animação para telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    .message {
+        font-size: 16px; /* Reduz ainda mais o tamanho da fonte */
+        padding: 15px; /* Reduz o padding */
+    }
+
+    .envelope {
+        width: 240px; /* Reduz ainda mais o tamanho do envelope */
+        height: 180px;
+    }
+
+    .flap .envelope-wrapper {
+        transform: translateY(-100px); /* Ajusta a animação para telas muito pequenas */
+    }
+}
